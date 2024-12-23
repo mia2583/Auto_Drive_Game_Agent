@@ -2,10 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import frozenLake_setting
 
-env = frozenLake_setting.init(is_slippery=False)
+env = frozenLake_setting.init()
 
 # Q 테이블 생성
 Q = np.zeros([env.observation_space.n, env.action_space.n])
+learning_rate = 0.85
 dis = 0.99 # discount factor
 num_episodes = 2000
 # episode마다의 총 리워드
@@ -28,7 +29,9 @@ for i in range(num_episodes):
         new_state, reward, done, truncated, info = env.step(action)
 
         # discount future reward(decay rate)
-        Q[state, action] = reward + dis * np.max(Q[new_state, :])
+        # non deterministic을 극복하기 위해 learning_rate 사용
+        Q[state, action] = (1-learning_rate) * Q[state, action] \
+            + learning_rate * (reward + dis * np.max(Q[new_state, :]))
         
         rAll += reward
         state = new_state
