@@ -18,14 +18,11 @@ def input_key():
     key = input("Enter wasd\n")
     return key
 
-def init():
+def init(is_slippery = True):
     register(
 	    id = 'FrozenLake-v3',
 	    entry_point='gym.envs.toy_text:FrozenLakeEnv',
-	    kwargs= {'map_name':'4x4', 'is_slippery':False}
+	    kwargs= {'map_name':'4x4', 'is_slippery':is_slippery}
     )
     # render_mode : (['human', 'ansi', 'rgb_array'])
     return gym.make('FrozenLake-v3', render_mode='ansi')
-
-    
-    

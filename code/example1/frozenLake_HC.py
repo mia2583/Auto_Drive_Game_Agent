@@ -1,6 +1,6 @@
 import frozenLake_setting
 
-env = frozenLake_setting.init()
+env = frozenLake_setting.init(is_slippery=False)
 env.reset()
 print(env.render())
 
@@ -19,3 +19,4 @@ while True:
 	if done:
 		print("Finished with reward ", reward)
 		break
+	

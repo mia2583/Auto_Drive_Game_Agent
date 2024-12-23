@@ -9,7 +9,7 @@ def rargmax(vector):
     indices = np.nonzero(vector == m)[0] # 최대값과 같은 요소에 True, 나머지는 False한 1차원 배열
     return random.choice(indices)
 
-env = frozenLake_setting.init()
+env = frozenLake_setting.init(is_slippery=False)
 
 # Q 테이블 생성
 Q = np.zeros([env.observation_space.n, env.action_space.n])
